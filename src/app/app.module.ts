@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './auth/store/auth.effects';
+
 import * as fromApp from './store/app.reducer';
 
 @NgModule({
@@ -22,6 +25,7 @@ import * as fromApp from './store/app.reducer';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     AppRoutingModule,
     SharedModule,
     AuthModule
