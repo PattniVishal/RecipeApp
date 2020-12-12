@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -13,8 +14,10 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { RecipesEffect } from './recipes/store/recipe.effects';
 
 import * as fromApp from './store/app.reducer';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import * as fromApp from './store/app.reducer';
     BrowserModule,
     HttpClientModule,
     StoreModule.forRoot(fromApp.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, RecipesEffect]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     AppRoutingModule,
     SharedModule,
     AuthModule

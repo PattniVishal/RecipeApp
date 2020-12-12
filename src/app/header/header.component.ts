@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
+import * as RecipesActions from '../recipes/store/recipe.actions';
 
 import { DataStorageService } from '../shared/data-storage.service';
 import { map } from 'rxjs/operators';
@@ -39,11 +40,13 @@ export class HeaderComponent implements OnInit, OnDestroy{
     }
 
     onSaveData(){
-        this.dataStorageService.storeRecipes();
+        // this.dataStorageService.storeRecipes();
+        this.store.dispatch(new RecipesActions.StoreRecipes());
     }
 
     onFetchData(){
-        this.dataStorageService.fetchRecipes().subscribe();
+        // this.dataStorageService.fetchRecipes().subscribe();
+        this.store.dispatch(new RecipesActions.FetchRecipes());
     }
 
     onLogout(){
